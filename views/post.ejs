@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome <%=user%> !</h1>
+    <a href="/logout">Sign out</a>
+    <h3>Please become a private member to see the author for each posts</h3>
+    <h3>please add a passcode to become a member to a form below</h3>
+     <form action="/profile/passcode" method="post">
+        <label for="passcode">Please add a passcode</label>
+      <input type="text" name="passcode" >
+      <button type="submit">Submit</button>
+     </form>
+
+    <h2>Current posts:</h2>
+    <ul>
+        <% for(let i=0;i<posts.length;i++){ %>
+            <li>
+                <%=posts[i].title %>
+                <%=posts[i].message %>
+            </li>
+            
+        <% } %>
+    </ul>
+     
+    <h2>Please add a message</h2>
+    <form action="/profile/createpost" method="post">
+        <label for="title"></label>
+        <input type="text" name="title" placeholder="title">
+        <label for="message"></label>
+        <input type="text" name="message" placeholder="message">
+        <button type="submit">Add a message</button>
+
+    </form>
+
+  </body>
+</html>
