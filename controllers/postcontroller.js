@@ -36,9 +36,17 @@ module.exports={
     getPostForMember: async(request,response)=>{
       try{
         const posts= await post.find().lean()
-        const userObj= user.findById({_id:request.user})
+        const userObj= await user.findById({_id:request.user})
         const userName= userObj.userName
-        response.render("member",{posts:posts,user:userName})
+        const authors=[]
+        for(let i=0;i<posts.length;i++){
+        const authorObj= await user.findById({_id:posts[i].user})
+        authors[i]= authorObj.userName
+    }
+      if(userObj.isAdmin){
+       return response.render("admin",{posts:posts,user:userName,authors:authors})
+      }
+        response.render("member",{posts:posts,user:userName, authors:authors})
       }
       catch(err){
         console.log(err)
@@ -46,7 +54,31 @@ module.exports={
       }
         
 
+    },
+    getAdminPage: async(request,response)=>{
+
+      try{
+        const posts= await post.find().lean()
+        const userObj= await user.findById({_id:request.user})
+        const userName= userObj.userName
+        response.render("admin",{posts:posts,user:userName})
+      }
+      catch(err){
+        console.log(err)
+      }
+
+    },
+    deletePost: async(request,response)=>{
+      try{
+         await post.findByIdAndDelete({_id:request.params.id})
+         console.log("Post is deleted")
+         response.redirect("/profile/member")
+      }
+      catch(err){
+        console.log(err)
+      }
     }
+
 
 
 }

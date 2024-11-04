@@ -15,6 +15,9 @@ module.exports={
         const authorObj= await user.findById({_id:posts[i].user})
         authors[i]= authorObj.userName
     }
+    if(userObj.isAdmin){
+        return response.render("admin",{posts:posts,user:userName,authors:authors})
+      }
     response.render("member",{posts:posts,user:userName,authors:authors})
 
  }

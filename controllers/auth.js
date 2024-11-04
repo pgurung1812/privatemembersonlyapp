@@ -9,6 +9,8 @@ const User = require('../models/User')
     if(req.user && req.user.member){
       return res.redirect("/profile/member")
     }
+
+   
     res.render('login', {
       title: 'Login'
     })
@@ -70,14 +72,23 @@ const User = require('../models/User')
       return res.redirect('../signup')
     }
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false })
-  
+    let isAdmin1=Boolean 
+    console.log(`isadmin: ${req.body.isAdmin}`)
+    if (req.body.isAdmin==="on"){
+      isAdmin1=true
+     }else
+     {
+      isAdmin1=false
+     }
     const user = new User({
       userName: req.body.userName,
       email: req.body.email,
       password: req.body.password,
-      member: false
+      member: false,
+      isAdmin: isAdmin1
+       
     })
-  
+     console.log(user)
 
 
    
