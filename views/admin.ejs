@@ -22,6 +22,7 @@
       integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <h1>Welcome <%=user%> !</h1>
@@ -29,12 +30,14 @@
     
     <h1>Hello Admin</h1>
     <h2>Current posts:</h2>
+    <div class="main-container">
     <ul>
         <% for(let i=0;i<posts.length;i++){ %>
             <li>
                 <%=posts[i].title %>   
                 <%=posts[i].message  %> <br>
-                <span>Written By:</span> <%=authors[i] %>
+                <span>Written By:</span> <%=authors[i] %> <br>
+                <span>Created at:</span> <%=posts[i].createdAt %>
                 <form
                 action="/profile/deletePost/<%= posts[i]._id %>?_method=DELETE"
                 method="POST"
@@ -47,6 +50,7 @@
             
         <% } %>
     </ul>
+  </div>
      
     <h2>Please add a message</h2>
     <form action="/profile/createpost" method="post">
