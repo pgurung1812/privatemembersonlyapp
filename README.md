@@ -2,7 +2,8 @@ Austin Exclusive Member Society
 
 Link to project: http://recruiters-love-seeing-live-demos.com/
 
-alt tag
+![7RQv](https://github.com/user-attachments/assets/abc276a8-9e2d-475c-b0ba-5a07893b03d1)
+
 
 How It's Made:
 I applied the concept of Model View Controller architecture to bring this project to a reality. Express was used to create a server that listens for incoming requests. Express's middleware functionlity checks whether the current user is logged in with it's correct credential. once confirmed, express takes the help of controllers to provide them with a view that displays all the current posts made by all the users. once a correct passcode is passed by the current logged in user, another view(member.ejs) displays all the posts with their authors and the date it was created. I also created a checkbox while signing up that asks if the current user is Admin or not. if user checks it, it will provide the current administrator with the ability to delete the posts as well.
